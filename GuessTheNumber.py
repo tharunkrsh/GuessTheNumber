@@ -88,6 +88,11 @@ def game():
 
     introGame()
     difficulty = get_difficulty()
+    computerNo = numberGen(difficulty)
+    
+    ranges = {"easy": 5, "medium": 20, "hard": 50, "extreme": 100}
+    guesses = {"easy": 3, "medium": 4, "hard": 5, "extreme": 6}
+    
 
 
 
