@@ -38,7 +38,6 @@ def introGame():
 difficulty = input("Please select a difficulty level (easy, medium, hard, extreme): ").lower()
 # computer generates number based on difficulty level
 
-
 computerNo = numbergen(difficulty)
 
 if computerNo != False:
