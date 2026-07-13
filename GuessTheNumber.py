@@ -97,26 +97,41 @@ def play_round(computerNo, max_guesses, ranges):
         if rangeCheck(int(user_no), computerNo):
             return True, guess_count + 1, ((max_guesses - guess_count)/max_guesses) *100
         
-        accuracy = ((max_guesses - guess_count)/max_guesses) * 100
         guess_count += 1
 
-    return False, guess_count, accuracy
+    return False, guess_count, 0
+
+def play_again():
+    """Asks the user if they want to play again."""
+    while True:
+        response = input("Do you want to play again? (y/n): ").lower()
+        if response == 'y':
+            return True
+        elif response == 'n':
+            print("Great guessing with you! See you next time.")
+            return False
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
 
 def game():
 
     introGame()
-    difficulty = get_difficulty()
-    computerNo = numberGen(difficulty)
-    
     ranges = {"easy": 5, "medium": 20, "hard": 50, "extreme": 100}
     max_guesses = {"easy": 3, "medium": 4, "hard": 5, "extreme": 6}
 
-    won, attempts, accuracy = play_round(computerNo, max_guesses[difficulty], ranges[difficulty])
-    if won:
-        print(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
-        print(f"Your accuracy was {accuracy:.2f}%.")
-    else:
-        print("Sorry, you've used all your attempts. The correct number was:", computerNo)
-        print(f"Your accuracy was {accuracy:.2f}%.")
+    while True:
+        difficulty = get_difficulty()
+        computerNo = numberGen(difficulty)
+        won, attempts, accuracy = play_round(computerNo, max_guesses[difficulty], ranges[difficulty])
+        if won:
+            print(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
+            print(f"Your accuracy was {accuracy:.2f}%.")
+        else:
+            print("Sorry, you've used all your attempts. The correct number was:", computerNo)
+            print(f"Your accuracy was {accuracy:.2f}%.")
+        
+        if not play_again():
+            break
+    
 
 game()
