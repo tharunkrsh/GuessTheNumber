@@ -31,4 +31,14 @@ def numberGen(difficulty):
         return np.random.randint(1, 101)
     return False
 
+def rangeCheck(userNo, computerNo):
+    if userNo < computerNo:
+        print("Your guess is too low.")
+        return False
+    elif userNo > computerNo:
+        print("Your guess is too high.")
+        return False
+    else:
+        return True
+
 introGame()
