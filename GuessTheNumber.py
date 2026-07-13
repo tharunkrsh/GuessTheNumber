@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-def introGame():
+def intro_game():
     print("Welcome to Guess the Number!")
     time.sleep(2)
     print("In this game, you will try to guess the number I have selected.")
@@ -20,7 +20,7 @@ def get_difficulty():
             return difficulty
         print("Invalid difficulty level selected. Please try again.")
 
-def numberGen(difficulty):
+def number_gen(difficulty):
     """Generates the computer's number based on
       the difficulty level."""
     
@@ -42,11 +42,11 @@ def numberGen(difficulty):
     
     return False
 
-def rangeCheck(userNo, computerNo):
-    if userNo < computerNo:
+def range_check(user_no, computer_no):
+    if user_no < computer_no:
         print("Your guess is too low.")
         return False
-    elif userNo > computerNo:
+    elif user_no > computer_no:
         print("Your guess is too high.")
         return False
     else:
@@ -62,11 +62,11 @@ def valid_guess(s):
             return False
     return True
 
-def inRange(userNo, ranges):
+def in_range(user_no, ranges):
     """Checks if the user's guess is within the valid range."""
-    return 1 <= userNo <= ranges
+    return 1 <= user_no <= ranges
 
-def play_round(computerNo, max_guesses, ranges):
+def play_round(computer_no, max_guesses, max_range):
     """
     Runs one full round.
     Returns a tuple:
@@ -76,7 +76,7 @@ def play_round(computerNo, max_guesses, ranges):
     Accuracy is the percentage of guesses that were correct
     (lower the guesses, higher the accuracy).
     """
-    print(f"I have selected a number between 1 and {ranges}.")
+    print(f"I have selected a number between 1 and {max_range}.")
     time.sleep(1)
     print(f"Attempt to guess the number in {max_guesses} attempts.")
     time.sleep(1)
@@ -90,11 +90,11 @@ def play_round(computerNo, max_guesses, ranges):
             print("Please enter a valid whole number.")
             continue  # doesn't cost a guess
 
-        if not inRange(int(user_no), ranges):
-            print(f"Please enter a number between 1 and {ranges}.")
+        if not in_range(int(user_no), max_range):
+            print(f"Please enter a number between 1 and {max_range}.")
             continue
 
-        if rangeCheck(int(user_no), computerNo):
+        if range_check(int(user_no), computer_no):
             return True, guess_count + 1, ((max_guesses - guess_count)/max_guesses) *100
         
         guess_count += 1
@@ -115,19 +115,19 @@ def play_again():
 
 def game():
 
-    introGame()
+    intro_game()
     ranges = {"easy": 5, "medium": 20, "hard": 50, "extreme": 100}
     max_guesses = {"easy": 3, "medium": 4, "hard": 5, "extreme": 6}
 
     while True:
         difficulty = get_difficulty()
-        computerNo = numberGen(difficulty)
-        won, attempts, accuracy = play_round(computerNo, max_guesses[difficulty], ranges[difficulty])
+        computer_no = number_gen(difficulty)
+        won, attempts, accuracy = play_round(computer_no, max_guesses[difficulty], ranges[difficulty])
         if won:
             print(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
             print(f"Your accuracy was {accuracy:.2f}%.")
         else:
-            print("Sorry, you've used all your attempts. The correct number was:", computerNo)
+            print("Sorry, you've used all your attempts. The correct number was:", computer_no)
             print(f"Your accuracy was {accuracy:.2f}%.")
         
         if not play_again():
