@@ -70,7 +70,11 @@ def play_round(computerNo, max_guesses, ranges):
     """
     Runs one full round.
     Returns a tuple:
-    (won (true/false), attempts_used)
+    (won, attempts_used, accuracy)
+    Won is True if the user guessed correctly, False otherwise.
+    Attempts_used is the number of guesses the user made.
+    Accuracy is the percentage of guesses that were correct
+    (lower the guesses, higher the accuracy).
     """
     print(f"I have selected a number between 1 and {ranges}.")
     time.sleep(1)
@@ -91,11 +95,12 @@ def play_round(computerNo, max_guesses, ranges):
             continue
 
         if rangeCheck(int(user_no), computerNo):
-            return True, guess_count + 1
-
+            return True, guess_count + 1, ((max_guesses - guess_count)/max_guesses) *100
+        
+        accuracy = ((max_guesses - guess_count)/max_guesses) * 100
         guess_count += 1
 
-    return False, guess_count
+    return False, guess_count, accuracy
 
 def game():
 
@@ -106,11 +111,12 @@ def game():
     ranges = {"easy": 5, "medium": 20, "hard": 50, "extreme": 100}
     max_guesses = {"easy": 3, "medium": 4, "hard": 5, "extreme": 6}
 
-    won, attempts = play_round(computerNo, max_guesses[difficulty], ranges[difficulty])
+    won, attempts, accuracy = play_round(computerNo, max_guesses[difficulty], ranges[difficulty])
     if won:
         print(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
+        print(f"Your accuracy was {accuracy:.2f}%.")
     else:
         print("Sorry, you've used all your attempts. The correct number was:", computerNo)
-
+        print(f"Your accuracy was {accuracy:.2f}%.")
 
 game()
