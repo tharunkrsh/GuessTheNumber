@@ -21,14 +21,25 @@ def get_difficulty():
         print("Invalid difficulty level selected. Please try again.")
 
 def numberGen(difficulty):
+    """Generates the computer's number based on
+      the difficulty level."""
+    
+    #easy: 1-5, 3 guesses
     if difficulty == "easy":
         return np.random.randint(1, 6)
+    
+    #medium: 1-20, 4 guesses
     if difficulty == "medium":
         return np.random.randint(1, 21)
+    
+    #hard: 1-50, 5 guesses
     if difficulty == "hard":
         return np.random.randint(1, 51)
+    
+    #extreme: 1-100, 6 guesses
     if difficulty == "extreme":
         return np.random.randint(1, 101)
+    
     return False
 
 def rangeCheck(userNo, computerNo):
@@ -41,7 +52,7 @@ def rangeCheck(userNo, computerNo):
     else:
         return True
 
-def is_valid_guess(s):
+def valid_guess(s):
     """error handling: returns True only if the string is a 
     whole number (no decimals, no letters)."""
     if len(s) == 0:
@@ -51,4 +62,36 @@ def is_valid_guess(s):
             return False
     return True
 
-introGame()
+def play_round(computerNo, max_guesses):
+    """
+    Runs one full round.
+    Returns a tuple:
+    (won (true/false), attempts_used)
+    """
+
+    guess_count = 0
+    while guess_count < max_guesses:
+        user_no = input("Please enter your guess: ")
+
+        if not valid_guess(user_no):
+            print("Please enter a valid whole number.")
+            continue  # doesn't cost a guess
+
+        if rangeCheck(int(user_no), computerNo):
+            return True, guess_count + 1
+
+        guess_count += 1
+
+    return False, guess_count
+
+def game():
+
+    introGame()
+    difficulty = get_difficulty()
+
+
+
+
+
+
+game()
