@@ -41,4 +41,14 @@ def rangeCheck(userNo, computerNo):
     else:
         return True
 
+def is_valid_guess(s):
+    """error handling: returns True only if the string is a 
+    whole number (no decimals, no letters)."""
+    if len(s) == 0:
+        return False
+    for char in s:
+        if char not in "0123456789":
+            return False
+    return True
+
 introGame()
