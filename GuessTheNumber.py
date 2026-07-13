@@ -62,12 +62,21 @@ def valid_guess(s):
             return False
     return True
 
-def play_round(computerNo, max_guesses):
+def inRange(userNo, ranges):
+    """Checks if the user's guess is within the valid range."""
+    return 1 <= userNo <= ranges
+
+def play_round(computerNo, max_guesses, ranges):
     """
     Runs one full round.
     Returns a tuple:
     (won (true/false), attempts_used)
     """
+    print(f"I have selected a number between 1 and {ranges}.")
+    time.sleep(1)
+    print(f"Attempt to guess the number in {max_guesses} attempts.")
+    time.sleep(1)
+    print('I will tell you if your guess is too high or too low. Good luck!')
 
     guess_count = 0
     while guess_count < max_guesses:
@@ -76,6 +85,10 @@ def play_round(computerNo, max_guesses):
         if not valid_guess(user_no):
             print("Please enter a valid whole number.")
             continue  # doesn't cost a guess
+
+        if not inRange(int(user_no), ranges):
+            print(f"Please enter a number between 1 and {ranges}.")
+            continue
 
         if rangeCheck(int(user_no), computerNo):
             return True, guess_count + 1
@@ -93,10 +106,11 @@ def game():
     ranges = {"easy": 5, "medium": 20, "hard": 50, "extreme": 100}
     max_guesses = {"easy": 3, "medium": 4, "hard": 5, "extreme": 6}
 
-
-
-
-
+    won, attempts = play_round(computerNo, max_guesses[difficulty], ranges[difficulty])
+    if won:
+        print(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
+    else:
+        print("Sorry, you've used all your attempts. The correct number was:", computerNo)
 
 
 game()
