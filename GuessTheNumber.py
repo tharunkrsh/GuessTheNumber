@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import sys
 
 # global variables to track statistics
 wins = 0
@@ -9,16 +10,25 @@ win_rate = 0
 avg_accuracy = 0
 total_accuracy = 0
 
+def typewriter(text, delay=0.035):
+    """Prints text one character at a time like a typewriter."""
+
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()  # move to a new line once the full line is typed out
+
 def intro_game():
     """Function prints the introduction to the game."""
-    print("Welcome to Guess the Number!")
-    time.sleep(2)
-    print("In this game, you will try to guess the number I have selected.")
-    time.sleep(2)
-    print("You will be given a certain number of attempts based on the difficulty level you choose.")
-    time.sleep(2)
-    print("I will give you hints if your guess is too high or too low.")
-    time.sleep(2)
+    typewriter("Welcome to Guess the Number!")
+    time.sleep(1)
+    typewriter("In this game, you will try to guess the number I have selected.")
+    time.sleep(1)
+    typewriter("You will be given a certain number of attempts based on the difficulty level you choose.")
+    time.sleep(1)
+    typewriter("I will give you hints if your guess is too high or too low.")
+    time.sleep(1)
 
 def get_difficulty():
     """Returns a valid difficulty level selected by the user."""
@@ -29,7 +39,7 @@ def get_difficulty():
         difficulty = input("Please select a difficulty level (easy, medium, hard, extreme): ").lower()
         if difficulty in options:
             return difficulty
-        print("Invalid difficulty level selected. Please try again.")
+        typewriter("Invalid difficulty level selected. Please try again.")
 
 def number_gen(difficulty):
     """Returns the computer's number 
@@ -107,11 +117,9 @@ def play_round(computer_no, max_guesses, max_range):
     """
 
     # intro based on difficulty
-    print(f"I have selected a number between 1 and {max_range}.")
+    typewriter(f"I have selected a number between 1 and {max_range}.")
     time.sleep(1)
-    print(f"Attempt to guess the number in {max_guesses} attempts.")
-    time.sleep(1)
-    print('I will tell you if your guess is too high or too low. Good luck!')
+    typewriter(f"Attempt to guess the number in {max_guesses} attempts.")
 
     guess_count = 0
     # loop until the user has used all their guesses
@@ -120,12 +128,12 @@ def play_round(computer_no, max_guesses, max_range):
 
         # error handling for invalid input
         if not valid_guess(user_no):
-            print("Please enter a valid whole number.")
+            typewriter("Please enter a valid whole number.")
             continue  # doesn't cost a guess
         
         # error handling for out of range input
         if not in_range(int(user_no), max_range):
-            print(f"Please enter a number between 1 and {max_range}.")
+            typewriter(f"Please enter a number between 1 and {max_range}.")
             continue # doesn't cost a guess
         
         # checks if user has won 
@@ -147,10 +155,10 @@ def play_again():
         if response == 'y':
             return True
         elif response == 'n':
-            print("Great guessing with you! See you next time.")
+            typewriter("Great guessing with you! See you next time.")
             return False
         else:
-            print("Invalid input. Please enter 'y' or 'n'.")
+            typewriter("Invalid input. Please enter 'y' or 'n'.")
 
 def game():
     # track statistics across one session of the game.
@@ -175,16 +183,17 @@ def game():
         
         # displays message and round statistics
         if won:
-            print(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
-            print(f"Your accuracy was {accuracy:.2f}%.")
+            typewriter(f"Congratulations! You've guessed the number correctly in {attempts} attempts.")
+            time.sleep(1)
+            typewriter(f"Your accuracy was {accuracy:.2f}%.")
 
             # adds to the total wins and accuracy for the session
             wins += 1
             total_accuracy += accuracy
 
         else:
-            print("Sorry, you've used all your attempts. The correct number was:", computer_no)
-            print(f"Your accuracy was {accuracy:.2f}%.")
+            typewriter(f"Sorry, you've used all your attempts. The correct number was: {computer_no}")
+            typewriter(f"Your accuracy was {accuracy:.2f}%.")
 
             # adds to the total losses and accuracy for the session
             # (accuracy is 0 for a loss)
@@ -204,17 +213,23 @@ def game():
             win_rate = 0
             avg_accuracy = 0
 
-        # displays session statistics
-        print("\n--- Your Stats ---")
-        print(f"Games played:      {games_played}")
-        print(f"Wins:              {wins}")
-        print(f"Win rate:          {win_rate:.2f}%")
-        print(f"Average accuracy:  {avg_accuracy:.2f}%")
-        print("------------------\n")
+        if input("Do you want to see your stats?: ").lower() in ("y", "yes"):
+            typewriter("\n--- Your Stats ---")
+            typewriter(f"Games played:      {games_played}")
+            typewriter(f"Wins:              {wins}")
+            typewriter(f"Win rate:          {win_rate:.2f}%")
+            typewriter(f"Average accuracy:  {avg_accuracy:.2f}%")
+            typewriter("------------------\n")
 
         # prompts the user to play again/stop playing
         if not play_again():
             break
     
+    typewriter("\n--- Final Stats ---")
+    typewriter(f"Games played:      {games_played}")
+    typewriter(f"Wins:              {wins}")
+    typewriter(f"Win rate:          {win_rate:.2f}%")
+    typewriter(f"Average accuracy:  {avg_accuracy:.2f}%")
+    typewriter("-------------------\n")
 
 game()
