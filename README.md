@@ -12,7 +12,7 @@ A number guessing game built in Python. Pick a difficulty, try to guess the comp
 - 
 ## Features
 
-- **Introduction** - prints introduction messages with time.sleep() used to make game feel more natural
+- **Introduction** - computer prints 'typewriter' style messages with time.sleep(delay) used to make game feel more natural
 - **Four difficulty levels**, each with its own range of numbers and attempt limit (eg. in 'easy' mode, you guess from 1-5 with 3 attempts)
 - **Input validation** — rejects bad/invalid input and out-of-range guesses <ins>without</ins> costing you an attempt
 - **Hints** after every guess ("too high" / "too low")
