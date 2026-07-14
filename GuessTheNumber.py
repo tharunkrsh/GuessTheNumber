@@ -40,9 +40,9 @@ def number_gen(difficulty):
     if difficulty == "easy":
         return np.random.randint(1, 6)
     
-    #medium: 1-20, 4 guesses
+    #medium: 1-15, 4 guesses
     if difficulty == "medium":
-        return np.random.randint(1, 21)
+        return np.random.randint(1, 16)
     
     #hard: 1-50, 5 guesses
     if difficulty == "hard":
@@ -160,7 +160,7 @@ def game():
     intro_game()
 
     # define the upper bound and max guesses for each difficulty
-    ranges = {"easy": 5, "medium": 20, "hard": 50, "extreme": 100}
+    ranges = {"easy": 5, "medium": 15, "hard": 50, "extreme": 100}
     max_guesses = {"easy": 3, "medium": 4, "hard": 5, "extreme": 6}
 
     # loop until the user decides to stop playing
@@ -205,8 +205,13 @@ def game():
             avg_accuracy = 0
 
         # displays session statistics
-        print(f"Games played: {games_played}, Wins: {wins}, Losses: {losses}, Win rate: {win_rate:.2f}%, Average accuracy: {avg_accuracy:.2f}%")
-        
+        print("\n--- Your Stats ---")
+        print(f"Games played:      {games_played}")
+        print(f"Wins:              {wins}")
+        print(f"Win rate:          {win_rate:.2f}%")
+        print(f"Average accuracy:  {avg_accuracy:.2f}%")
+        print("------------------\n")
+
         # prompts the user to play again/stop playing
         if not play_again():
             break
