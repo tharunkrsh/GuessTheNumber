@@ -10,7 +10,7 @@ A number guessing game built in Python. Pick a difficulty, try to guess the comp
 - Run out of attempts and it's a loss, with the correct number revealed
 - Global counters track your stats across every round played this session, shown after each game
 
-![Gameplay screenshot](ReadMeSS.png)
+![Gameplay screenshot](images/ReadMeSS.png)
 
 ## Features
 
