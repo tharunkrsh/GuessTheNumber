@@ -9,9 +9,7 @@ A number guessing game built in Python. Pick a difficulty, try to guess the comp
 - Guess correctly within the attempt limit to win — accuracy is calculated based on how many attempts you had left
 - Run out of attempts and it's a loss, with the correct number revealed
 - Global counters track your stats across every round played this session, shown after each game
-
-![Gameplay screenshot](readmepic.png)
-
+- 
 ## Features
 
 - **Introduction** - prints introduction messages with time.sleep() used to make game feel more natural
@@ -40,6 +38,10 @@ python guess_the_number.py
 ```
 
 Follow the prompts to select a difficulty, then start guessing.
+
+## Gameplay
+
+![Gameplay screenshot](readmepic.png)
 
 ## Author
 
