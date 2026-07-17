@@ -25,16 +25,6 @@ def rangeCheck(userNo, computerNo):
 
 
 
-def introGame():
-    print("Welcome to Guess the Number!")
-    time.sleep(1)
-    print("In this game, you will try to guess the number I have selected.")
-    time.sleep(1)
-    print("You will be given a certain number of attempts based on the difficulty level you choose.")
-    time.sleep(1)
-    print("I will give you hints if your guess is too high or too low.")
-    time.sleep(1)
-
 difficulty = input("Please select a difficulty level (easy, medium, hard, extreme): ").lower()
 # computer generates number based on difficulty level
 
@@ -67,3 +57,22 @@ if computerNo != False:
 
 else:
         print("Invalid difficulty level selected. Please restart the game and choose a valid option.")
+
+def introGame():
+    """Function prints the introduction to the game."""
+    banner = r"""
+   _____ _    _ ______  _____ _____    _______ _    _ ______ 
+  / ____| |  | |  ____|/ ____/ ____|  |__   __| |  | |  ____|
+ | |  __| |  | | |__  | (___| (___       | |  | |__| | |__   
+ | | |_ | |  | |  __|  \___ \\___ \      | |  | |__| | __|  
+ | |__| | |__| | |____ ____) |___) |     | |  | |  | | |____ 
+  \_____|\____/|______|_____/_____/      |_|  |_|  |_|______|
+             _   _ _   _ __  __ ____  _____ ____  
+            | \ | | | | |  \/  | __ )| ____|  _ \ 
+            |  \| | | | | |\/| |  _ \|  _| | |_) |
+            | |\  | |_| | |  | | |_) | |___|  _ < 
+            |_| \_|\___/|_|  |_|____/|_____|_| \_\
+    """
+    print(banner)
+
+introGame()

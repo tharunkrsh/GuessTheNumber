@@ -21,6 +21,21 @@ def typewriter(text, delay=0.035):
 
 def intro_game():
     """Function prints the introduction to the game."""
+    banner = r"""
+   _____ _    _ ______  _____ _____    _______ _    _ ______ 
+  / ____| |  | |  ____|/ ____/ ____|  |__   __| |  | |  ____|
+ | |  __| |  | | |__  | (___| (___       | |  | |__| | |__   
+ | | |_ | |  | |  __|  \___ \\___ \      | |  | |__| | __|  
+ | |__| | |__| | |____ ____) |___) |     | |  | |  | | |____ 
+  \_____|\____/|______|_____/_____/      |_|  |_|  |_|______|
+             _   _ _   _ __  __ ____  _____ ____  
+            | \ | | | | |  \/  | __ )| ____|  _ \ 
+            |  \| | | | | |\/| |  _ \|  _| | |_) |
+            | |\  | |_| | |  | | |_) | |___|  _ < 
+            |_| \_|\___/|_|  |_|____/|_____|_| \_\
+    """
+    print(banner)
+    time.sleep(1.5)
     typewriter("Welcome to Guess the Number!")
     time.sleep(1)
     typewriter("In this game, you will try to guess the number I have selected.")
@@ -161,7 +176,9 @@ def play_again():
             typewriter("Invalid input. Please enter 'y' or 'n'.")
 
 def game():
-    # track statistics across one session of the game.
+    """Main function to run the game, all other functions are called from here."""
+
+    # track statistics across one 'session' of the game (until user decides to stop replaying).
     global wins, losses, games_played, win_rate, avg_accuracy, total_accuracy
     
     # call the intro function to print the introduction to the game
@@ -193,6 +210,7 @@ def game():
 
         else:
             typewriter(f"Sorry, you've used all your attempts. The correct number was: {computer_no}")
+            time.sleep(1)
             typewriter(f"Your accuracy was {accuracy:.2f}%.")
 
             # adds to the total losses and accuracy for the session
