@@ -1,5 +1,7 @@
 # GuessTheNumber
 
+![Introduction screenshot](readmepic2.png)
+
 A number guessing game built in Python. Pick a difficulty, try to guess the computer's randomly selected number within a limited number of attempts, and get your stats across sessions.
 
 ## How It Works
